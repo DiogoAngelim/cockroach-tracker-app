@@ -1,0 +1,11 @@
+/*
+  Custom style to ensure input hover text is white in dark mode.
+*/
+
+input[data-slot="input"]:hover {
+  color: var(--foreground);
+}
+
+.dark input[data-slot="input"]:hover {
+  color: #fff;
+}
