@@ -17,25 +17,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
-
-
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-          run_install: false
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Build Electron app
-        run: pnpm run dist
+        run: npm run dist
 
       - name: Upload release assets
         uses: softprops/action-gh-release@v2
