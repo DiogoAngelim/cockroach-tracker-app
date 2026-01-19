@@ -78,14 +78,13 @@ export function EntryForm({ onActionComplete }: { onActionComplete?: () => void 
     let added = false;
     trapTags.forEach(trapId => {
       const count = getCountValue(trapId)
-      if (count > 0) {
-        addEntry({
-          date,
-          trapId,
-          count,
-        })
-        added = true;
-      }
+      // Allow adding 0 cockroaches
+      addEntry({
+        date,
+        trapId,
+        count,
+      })
+      added = true;
     })
     // Reset form
     setCounts({})
@@ -218,8 +217,7 @@ export function EntryForm({ onActionComplete }: { onActionComplete?: () => void 
               type="submit"
               className="w-full font-bold uppercase"
               disabled={
-                trapTags.length === 0 ||
-                trapTags.every(trap => !counts[trap] || parseInt(counts[trap] || '0', 10) === 0)
+                trapTags.length === 0
               }
             >
               TAKE ACTION

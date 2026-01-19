@@ -5,16 +5,22 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 import ClientLayout from "./ClientLayout";
+import { HueInvertEffect } from "./hue-invert-effect";
+import { RoachProvider } from "@/lib/roach-context";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Roach Monitor - Daily Cockroach Tracking',
+  title: 'Roach Tracker',
   description: 'Track and monitor cockroach trap data with daily inputs, charts, and analytics',
   generator: 'v0.app',
   icons: {
     icon: [
+      {
+        url: '/apple-icon.png',
+        type: 'image/png',
+      },
       {
         url: '/icon-light-32x32.png',
         media: '(prefers-color-scheme: light)',
@@ -40,10 +46,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
-        <Analytics />
+        <RoachProvider>
+          <HueInvertEffect />
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+          <Analytics />
+        </RoachProvider>
       </body>
     </html>
   )
