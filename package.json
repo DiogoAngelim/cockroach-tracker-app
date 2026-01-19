@@ -3,25 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": {
-      "appId": "com.cockroach.tracking.app",
-      "productName": "Cockroach Tracking App",
-      "files": [
-        "main.js",
-        "out/**",
-        "public/**",
-        "next.config.mjs",
-        "package.json"
-      ],
-      "directories": {
-        "buildResources": "public"
-      },
-      "mac": {
-        "category": "public.app-category.productivity"
-      },
-      "win": {},
-      "linux": {}
-    },
+    "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
