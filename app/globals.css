@@ -123,10 +123,18 @@
   }
 
   html {
-    font-size: 1.96em;
+    font-size: 1em;
   }
 
   body {
     @apply bg-background text-foreground;
   }
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
