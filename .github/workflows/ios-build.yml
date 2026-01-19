@@ -1,0 +1,56 @@
+name: iOS Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby (for CocoaPods, if needed)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+
+      - name: Install CocoaPods dependencies
+        run: |
+          if [ -f "Podfile" ]; then
+            sudo gem install cocoapods
+            pod install
+          fi
+
+      - name: Install Node.js (if needed)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install npm dependencies (if needed)
+        run: |
+          if [ -f "package.json" ]; then
+            npm install
+          fi
+
+      - name: Build iOS app
+        run: |
+          # Replace with your actual workspace and scheme
+          xcodebuild -workspace YourApp.xcworkspace -scheme YourScheme -sdk iphoneos -configuration Release clean build
+
+      # Optionally, export the .ipa for distribution
+      # - name: Export .ipa
+      #   run: |
+      #     xcodebuild -workspace YourApp.xcworkspace -scheme YourScheme -sdk iphoneos -configuration Release -archivePath $PWD/build/YourApp.xcarchive archive
+      #     xcodebuild -exportArchive -archivePath $PWD/build/YourApp.xcarchive -exportPath $PWD/build/YourApp -exportOptionsPlist ExportOptions.plist
+
+      # Optionally, upload build artifacts
+      # - name: Upload build artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: iOS-build
+      #     path: build/YourApp
